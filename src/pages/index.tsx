@@ -4,6 +4,7 @@ import { Button, InputBox } from '@src/components/ui/atom';
 import { RepositoryInfo } from '@src/components/ui/molecule';
 import siteMetadata from '@src/core/config/siteMetadata';
 import { initEnvironment } from '@src/core/lib/relay';
+import { addStar, removeStar } from '@src/core/mutations';
 import repositoryOwnerQuery, {
   RepositoryOwnerQueryResponse,
 } from '@src/core/queries/repositoryOwnerQuery';
@@ -120,6 +121,22 @@ function HomePage({ repositoryOwner }: HomePageProps) {
     [fetchNextPage]
   );
 
+  const handleStarClick = useCallback((nodeId: string, isStarred: boolean) => {
+    const environment = initEnvironment();
+    if (!isStarred) {
+      addStar(environment, nodeId);
+    } else {
+      removeStar(environment, nodeId);
+    }
+    setRepoInfo((prev) => {
+      return produce(prev, (draft) => {
+        const target = draft.repositories.edges.find((edge) => edge.node.id === nodeId);
+        target.node.viewerHasStarred = !target.node.viewerHasStarred;
+        target.node.stargazerCount += target.node.viewerHasStarred ? 1 : -1;
+      });
+    });
+  }, []);
+
   return (
     <PageLayout>
       <PageSEO title={siteMetadata.title} description={'Search Github Repositories'} />
@@ -137,7 +154,7 @@ function HomePage({ repositoryOwner }: HomePageProps) {
         {edges.length > 0 ? (
           <Fragment>
             {edges.map((edge) => (
-              <RepositoryInfo key={edge.cursor} {...edge} />
+              <RepositoryInfo key={edge.cursor} {...edge} onStarClick={handleStarClick} />
             ))}
             <div className="py-2">
               <Button roundness="counter" onClick={handleLoadMore}>
