@@ -21,10 +21,10 @@ const selectRounded: { [key in btnRounded]: string } = {
 };
 
 const selectSize: { [keys in btnSizes]: string } = {
-  large: 'px-16 text-lg h-16',
-  medium: 'px-10 text-lg h-12',
-  small: 'px-8 h-8',
-  xsmall: 'px-6 h-6',
+  large: 'px-16 h-16 text-lg',
+  medium: 'px-10 h-12 text-base',
+  small: 'px-8 h-8 text-sm',
+  xsmall: 'px-6 h-6 text-xs',
   none: '',
 };
 

@@ -5,7 +5,7 @@ import { Button, Icon } from '../atom';
 
 const RepositoryInfo: FunctionComponent<RepositoryEdge> = ({ node }) => {
   return (
-    <div className="w-full">
+    <div className="w-full py-2">
       <div className="space-y-2">
         <p className="font-bold">{node.name}</p>
         <p>{node.description ?? node.name}</p>

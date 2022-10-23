@@ -10,7 +10,7 @@ export interface RepositoryEdge {
   cursor: string;
 }
 
-export interface RepositoryOwnerQueryResponse {
+export interface RepositoriesQueryResponse {
   edges: Array<RepositoryEdge>;
 }
 
@@ -24,7 +24,7 @@ export interface RepositoryOwnerQueryResponse extends OperationType {
     repositoryOwner: {
       id: string;
       login: string;
-      repositories: RepositoryOwnerQueryResponse;
+      repositories: RepositoriesQueryResponse;
     };
   };
 }
