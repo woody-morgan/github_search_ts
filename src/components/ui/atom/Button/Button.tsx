@@ -21,10 +21,10 @@ const selectRounded: { [key in btnRounded]: string } = {
 };
 
 const selectSize: { [keys in btnSizes]: string } = {
-  large: 'px-16 h-16 text-lg',
-  medium: 'px-10 h-12 text-base',
-  small: 'px-8 h-8 text-sm',
-  xsmall: 'px-6 h-6 text-xs',
+  large: 'px-12 h-16 text-lg',
+  medium: 'px-8 h-12 text-base',
+  small: 'px-4 h-8 text-sm',
+  xsmall: 'px-2 h-6 text-xs',
   none: '',
 };
 
@@ -58,14 +58,14 @@ const Button: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
       ref={ref}
       type={type}
       className={cx(
-        className,
         selectSize[size],
         selectStyle[styles],
         selectRounded[roundness],
         'transition-colors bg-slate focus:shadow-outline duration-150',
         'hover:bg-opacity-90 focus:bg-opacity-90',
         disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
-        fullWidth ? 'w-full' : ''
+        fullWidth ? 'w-full' : '',
+        className
       )}
       onClick={onClick}
     >
