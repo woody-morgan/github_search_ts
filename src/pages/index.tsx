@@ -7,8 +7,9 @@ import { initEnvironment } from '@src/core/lib/relay';
 import repositoryOwnerQuery, {
   RepositoryOwnerQueryResponse,
 } from '@src/core/queries/repositoryOwnerQuery';
+import { ToastError } from '@src/utils/toastUtil';
 import { produce } from 'immer';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { fetchQuery } from 'react-relay';
 
 const pagination = 5;
@@ -44,7 +45,7 @@ function HomePage({ repositoryOwner }: HomePageProps) {
   const { edges } = repositoryInfo.repositories;
   const lastCursor = useRef<string>(edges[edges.length - 1].cursor);
 
-  const handleLoadMore = async () => {
+  const handleLoadMore = useCallback(async () => {
     const environment = initEnvironment();
     const queryProps = await fetchQuery<RepositoryOwnerQueryResponse>(
       environment,
@@ -56,9 +57,11 @@ function HomePage({ repositoryOwner }: HomePageProps) {
       }
     );
     const _newRepositoryInfo = { ...queryProps } as RepositoryOwnerQueryResponse['response'];
-
     // exception
-    if (_newRepositoryInfo.repositoryOwner.repositories.edges.length === 0) return;
+    if (_newRepositoryInfo.repositoryOwner.repositories.edges.length === 0) {
+      ToastError('더 이상 불러올 데이터가 없습니다.');
+      return;
+    }
 
     lastCursor.current =
       _newRepositoryInfo.repositoryOwner.repositories.edges[
@@ -73,7 +76,7 @@ function HomePage({ repositoryOwner }: HomePageProps) {
         }),
       },
     }));
-  };
+  }, []);
 
   return (
     <PageLayout>
