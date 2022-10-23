@@ -1,4 +1,4 @@
-import { RepositoryEdge } from '@src/core/queries/repositoryOwner';
+import { RepositoryEdge } from '@src/core/queries/repositoryOwnerQuery';
 import React, { FunctionComponent } from 'react';
 
 import { Button, Icon } from '../atom';
