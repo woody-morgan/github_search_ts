@@ -59,7 +59,7 @@ function HomePage({ repositoryOwner }: HomePageProps) {
         {
           login: nextSearchText,
           first: pagination,
-          after: lastCursor.current ?? null,
+          after: repoInfo.login === nextSearchText ? lastCursor.current : null,
         }
       );
       const _newRepo = { ...queryProps } as RepositoryOwnerQueryResponse['response'];
@@ -70,12 +70,22 @@ function HomePage({ repositoryOwner }: HomePageProps) {
         setRepoInfo({ id: null, login: null, repositories: { edges: [] } });
         return;
       }
-      // No more data
-      if (
-        repoInfo.id === _newRepo.repositoryOwner.id &&
-        _newRepo.repositoryOwner.repositories.edges.length === 0
-      ) {
-        ToastError('더이상 데이터가 없습니다.');
+      // No data
+      if (_newRepo.repositoryOwner.repositories.edges.length === 0) {
+        // last page
+        if (repoInfo.id === _newRepo.repositoryOwner.id) {
+          ToastError('No more data');
+        } else {
+          // first search
+          lastCursor.current = null;
+          setRepoInfo(_newRepo.repositoryOwner);
+        }
+        return;
+      }
+      // Found but no data
+      if (_newRepo.repositoryOwner.repositories.edges.length === 0) {
+        lastCursor.current = null;
+        setRepoInfo(_newRepo.repositoryOwner);
         return;
       }
       // set cursor
@@ -86,7 +96,6 @@ function HomePage({ repositoryOwner }: HomePageProps) {
       // different user or nextSearchText is empty
       if (repoInfo.id !== _newRepo.repositoryOwner.id) {
         // set cursor
-
         setRepoInfo(_newRepo.repositoryOwner);
         return;
       } else {
