@@ -12,7 +12,7 @@ import { fetchQuery } from 'react-relay';
 const pagination = 5;
 const defaultLogin = 'green-labs';
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const environment = initEnvironment();
   const queryProps = await fetchQuery<RepositoryOwnerQueryResponse>(
     environment,
