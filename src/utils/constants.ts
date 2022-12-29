@@ -14,3 +14,6 @@ export type btnStyles =
   | 'success'
   | 'warning'
   | 'transparent';
+
+export const pagination = 5;
+export const defaultLogin = 'green-labs';

@@ -130,7 +130,7 @@ const MainPageTemplate: FunctionComponent<HomePageTemplateProps> = ({
 
   return (
     <div className="w-full divide-y-2">
-      <div className="flex py-2 w-4/5 mx-auto">
+      <div className="flex py-2">
         <InputBox
           type="id"
           name="searchText"
