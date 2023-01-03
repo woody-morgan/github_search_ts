@@ -3,46 +3,24 @@ import { PageLayout } from '@src/components/layout';
 import { HomePageTemplate } from '@src/components/template';
 import siteMetadata from '@src/core/config/siteMetadata';
 import { initEnvironment } from '@src/core/lib/relay';
-import repositoryOwnerQuery, {
-  RepositoryOwnerQueryResponse,
-} from '@src/core/queries/repositoryOwnerQuery';
-import { defaultLogin, pagination } from '@src/utils/constants';
-import { fetchQuery } from 'react-relay';
 
-export async function getServerSideProps() {
-  const environment = initEnvironment();
-  const queryProps = await fetchQuery<RepositoryOwnerQueryResponse>(
-    environment,
-    repositoryOwnerQuery,
-    {
-      login: defaultLogin,
-      first: pagination,
-    }
-  );
-  const initialRecords = environment.getStore().getSource().toJSON();
-  return {
-    props: {
-      ...queryProps,
-      initialRecords,
-    },
-  };
-}
-
-export interface HomePageProps {
-  repositoryOwner: RepositoryOwnerQueryResponse['response']['repositoryOwner'];
-}
-
-function HomePage({ repositoryOwner }: HomePageProps) {
+const HomePage = () => {
   return (
     <PageLayout>
       <PageSEO title={siteMetadata.title} description={'Search Github Repositories'} />
-      <HomePageTemplate
-        repositoryOwner={repositoryOwner}
-        defaultLogin={defaultLogin}
-        pagination={pagination}
-      />
+      <HomePageTemplate />
     </PageLayout>
   );
+};
+
+export async function getServerSideProps() {
+  const environment = initEnvironment();
+  const initialRecords = environment.getStore().getSource().toJSON();
+  return {
+    props: {
+      initialRecords,
+    },
+  };
 }
 
 export default HomePage;
