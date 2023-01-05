@@ -1,7 +1,7 @@
-import cx from 'classnames';
-import React, { ButtonHTMLAttributes, FC } from 'react';
+import cx from "classnames";
+import React, { ButtonHTMLAttributes, FC } from "react";
 
-import Icon, { SVGTypes } from './Icon';
+import Icon, { SVGTypes } from "./Icon";
 
 export type IconButtonProps = {
   name: SVGTypes;
@@ -10,7 +10,7 @@ export type IconButtonProps = {
 
 const IconButton: FC<IconButtonProps> = ({ className, name, size, ...props }) => {
   return (
-    <button className={cx(className, 'flex justify-center items-center')} {...props}>
+    <button className={cx(className, "flex justify-center items-center")} {...props}>
       <Icon name={name} size={size} />
     </button>
   );

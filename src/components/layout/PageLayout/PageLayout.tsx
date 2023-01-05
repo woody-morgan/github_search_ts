@@ -1,9 +1,9 @@
-import useWindowResize from '@src/hooks/useWindowResize';
-import cx from 'classnames';
-import React, { FC, useRef } from 'react';
+import useWindowResize from "@src/hooks/useWindowResize";
+import cx from "classnames";
+import React, { FC, useRef } from "react";
 
-import CommonHeader from './CommonHeader';
-import HeaderWrapper from './HeaderWrapper';
+import CommonHeader from "./CommonHeader";
+import HeaderWrapper from "./Header";
 
 const PageLayout: FC<{
   children: React.ReactNode;
@@ -29,19 +29,19 @@ const PageLayout: FC<{
   // to recalculate height when mobile browser search bar appeared and disappeared
   useWindowResize(() => {
     if (fixedHeight) {
-      mainRef.current.style.setProperty('height', `${window.innerHeight}px`);
-      document.body.style.overflow = 'hidden';
+      mainRef.current.style.setProperty("height", `${window.innerHeight}px`);
+      document.body.style.overflow = "hidden";
     } else {
-      mainRef.current.style.setProperty('height', 'h-full');
-      document.body.style.overflow = 'auto';
+      mainRef.current.style.setProperty("height", "h-full");
+      document.body.style.overflow = "auto";
     }
   }, 100);
 
   return (
     <div
       className={cx(
-        'relative w-full max-w-mobile-app m-center',
-        overflowVisible ? 'overflow-visible' : 'overflow-hidden'
+        "relative w-full max-w-mobile-app m-center",
+        overflowVisible ? "overflow-visible" : "overflow-hidden"
       )}
     >
       <HeaderWrapper fixed={headerFixed} transparent={headerTransparent}>
@@ -51,9 +51,9 @@ const PageLayout: FC<{
         ref={mainRef}
         className={cx(
           className,
-          'relative m-center w-full pt-gb-header pb-bt-nav',
+          "relative m-center w-full pt-gb-header pb-bt-nav",
           fullWidth ? null : `max-w-mobile-app px-side-padding`,
-          fixedHeight ? 'overflow-hidden h-screen' : 'min-h-screen'
+          fixedHeight ? "overflow-hidden h-screen" : "min-h-screen"
         )}
       >
         {children}

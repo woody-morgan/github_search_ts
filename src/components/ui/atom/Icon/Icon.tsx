@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from 'react';
-import { AiFillStar } from 'react-icons/ai';
+import React, { FunctionComponent } from "react";
+import { AiFillStar } from "react-icons/ai";
 
-export type SVGTypes = 'star';
+export type SVGTypes = "star";
 
 export type IconProps = {
   name: SVGTypes;

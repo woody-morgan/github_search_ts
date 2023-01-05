@@ -1,1 +1,1 @@
-export { default as useWindowResize } from './useWindowResize';
+export { default as useWindowResize } from "./useWindowResize";

@@ -6,6 +6,10 @@ const nextConfig = {
     API_ENDPOINT: process.env.API_ENDPOINT,
     GITHUB_TOKEN: process.env.GITHUB_TOKEN,
   },
+  eslint: {
+    dirs: ['src'],
+    ignoreDuringBuilds: true,
+  },
 };
 
 module.exports = nextConfig;

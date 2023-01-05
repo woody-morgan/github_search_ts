@@ -1,15 +1,15 @@
-import { useMemo } from 'react';
-import type { Variables } from 'react-relay';
-import { Environment, Network, RecordSource, Store } from 'relay-runtime';
+import { useMemo } from "react";
+import type { Variables } from "react-relay";
+import { Environment, Network, RecordSource, Store } from "relay-runtime";
 
-import { envConfig } from '../config/envConfig';
+import { envConfig } from "../config/envConfig";
 
 async function fetchGraphQL(request, variables: Variables) {
   const response = await fetch(envConfig.API_ENDPOINT, {
-    method: 'POST',
+    method: "POST",
     headers: {
       Authorization: `Bearer ${envConfig.GITHUB_TOKEN}`,
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       query: request.text,
@@ -31,7 +31,7 @@ let relayEnvironment;
 export function initEnvironment() {
   const environment = relayEnvironment ?? createEnvironment();
 
-  if (typeof window === 'undefined') return environment;
+  if (typeof window === "undefined") return environment;
 
   if (!relayEnvironment) relayEnvironment = environment;
 

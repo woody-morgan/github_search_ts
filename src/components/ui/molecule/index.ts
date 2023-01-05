@@ -1,2 +1,2 @@
-export { default as InfiniteView } from './InfiniteView';
-export { default as RepositoryCard } from './RepositoryCard';
+export { default as RepositoryCard } from "./Card/RepositoryCard";
+export { default as RepositoriesView } from "./RepositoriesView";

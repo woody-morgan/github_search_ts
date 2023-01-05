@@ -1,4 +1,4 @@
-import { commitMutation, graphql } from 'relay-runtime';
+import { commitMutation, graphql } from "relay-runtime";
 
 const mutation = graphql`
   mutation addStarMutation($input: AddStarInput!) {

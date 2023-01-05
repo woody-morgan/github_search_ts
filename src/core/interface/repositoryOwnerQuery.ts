@@ -1,4 +1,4 @@
-import { graphql, OperationType } from 'relay-runtime';
+import { OperationType } from "relay-runtime";
 
 export interface RepositoryEdge {
   node: {
