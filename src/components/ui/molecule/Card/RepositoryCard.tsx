@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, { FunctionComponent } from "react";
 import { graphql, useFragment } from "react-relay";
 
-import { Button, Icon } from "../../atom";
+import StarCountButton from "../Button/StarCountButton";
 import type { RepositoryCard_Fragment$key } from "./__generated__/RepositoryCard_Fragment.graphql";
 
 const RepositoryCardFragment = graphql`
@@ -24,7 +24,7 @@ const RepositoryInfo: FunctionComponent<{
   query: RepositoryCard_Fragment$key;
 }> = ({ query }) => {
   const {
-    node: { name, description, stargazerCount, viewerHasStarred, url },
+    node: { name, description, stargazerCount, viewerHasStarred, url, id },
   } = useFragment(RepositoryCardFragment, query);
 
   return (
@@ -32,19 +32,13 @@ const RepositoryInfo: FunctionComponent<{
       <div className="space-y-2">
         <p className="font-bold">{name}</p>
         <p>{description ?? name}</p>
-        <Button
-          className={viewerHasStarred ? "bg-primary-500" : "bg-gray-300"}
-          roundness="counter"
-          size="small"
-          onClick={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <span className="flex items-center space-x-2 pointer-events-none">
-            <Icon className="text-yellow-400" name="star" />
-            <p>{stargazerCount}</p>
-          </span>
-        </Button>
+        {id && (
+          <StarCountButton
+            starrableId={id}
+            viewerHasStarred={viewerHasStarred}
+            stargazerCount={stargazerCount}
+          />
+        )}
       </div>
     </Link>
   );
