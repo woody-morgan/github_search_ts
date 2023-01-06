@@ -1,7 +1,7 @@
 const siteMetadata = {
-  title: "GreenLabs",
-  description: "GreenLabs - Github Search Assignment",
-  siteUrl: "https://greenlabs-github-search.vercel.app/",
+  title: "Github",
+  description: "Github Search",
+  siteUrl: "https://github-search-ts-alpha.vercel.app/",
   siteLogo: "/logo.png",
   socialBanner: "/static/banner.jpg",
 };

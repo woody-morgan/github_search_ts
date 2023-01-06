@@ -7,7 +7,7 @@ const nextConfig = {
     GITHUB_TOKEN: process.env.GITHUB_TOKEN,
   },
   eslint: {
-    dirs: ['src'],
+    dirs: ["src"],
     ignoreDuringBuilds: true,
   },
 };
