@@ -1,50 +1,42 @@
-import { PageSEO } from '@src/components/analytics/SEO';
-import { PageLayout } from '@src/components/layout';
-import { InputBox } from '@src/components/ui/atom';
-import siteMetadata from '@src/core/config/siteMetadata';
-import { defaultPagination, defaultSearchText } from '@src/utils/constants';
-import { SyntheticEvent, useCallback, useMemo, useState } from 'react';
-import { graphql, useLazyLoadQuery } from 'react-relay';
+import { Button, InputBox } from "@src/components/ui/atom";
+import { defaultPagination } from "@src/utils/constants";
+import { useRouter } from "next/router";
+import { FunctionComponent, SyntheticEvent, useCallback } from "react";
+import { graphql, useLazyLoadQuery } from "react-relay";
 
-import { InfiniteView } from '../ui/molecule';
-import type { HomePageTemplate_Index_Query } from './__generated__/HomePageTemplate_Index_Query.graphql';
+import { RepositoriesView } from "../ui/molecule";
+import type { HomePageTemplate_Index_Query } from "./__generated__/HomePageTemplate_Index_Query.graphql";
 
 const HomePageTemplateQuery = graphql`
   query HomePageTemplate_Index_Query($query: String!, $first: Int!, $after: String) {
-    ...InfiniteView_Index_Fragment @arguments(first: $first, after: $after)
+    ...RepositoriesView_Index_Fragment @arguments(first: $first, after: $after)
   }
 `;
 
-const HomePageTemplate = () => {
-  const searchText = useMemo(() => defaultSearchText, []);
+const HomePageTemplate: FunctionComponent<{
+  searchText: string;
+}> = ({ searchText }) => {
+  const router = useRouter();
 
   const query = useLazyLoadQuery<HomePageTemplate_Index_Query>(HomePageTemplateQuery, {
     query: searchText,
     first: defaultPagination,
   });
 
-  const [search, setSearch] = useState(searchText);
-
-  const handleSearchTextChange = useCallback((e: SyntheticEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-
-    setSearch(value);
-  }, []);
+  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const value = e.currentTarget.elements["search"]["value"];
+    router.push(value ? `/?search=${value}` : "/");
+  };
 
   return (
-    <div className="w-full divide-y-2">
-      <div className="flex py-2">
-        <InputBox
-          type="id"
-          name="searchText"
-          placeholder={'Github Repo'}
-          value={search}
-          fullWidth
-          onChange={handleSearchTextChange}
-        />
+    <form onSubmit={handleSubmit}>
+      <div className="flex">
+        <InputBox type="id" name="search" placeholder="Github Repo" fullWidth />
+        <Button type="submit">Search</Button>
       </div>
-      <InfiniteView query={query} />
-    </div>
+      <RepositoriesView query={query} />
+    </form>
   );
 };
 

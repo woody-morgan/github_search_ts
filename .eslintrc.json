@@ -1,9 +1,7 @@
 {
   "env": {
     "browser": true,
-    "commonjs": true,
-    "es6": true,
-    "node": true
+    "es6": true
   },
   "parser": "@typescript-eslint/parser",
   "plugins": [
@@ -20,7 +18,8 @@
     "plugin:prettier/recommended",
     "prettier",
     "next",
-    "next/core-web-vitals"
+    "next/core-web-vitals",
+    "eslint-config-prettier"
   ],
   "parserOptions": {
     "sourceType": "module",

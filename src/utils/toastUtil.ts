@@ -1,10 +1,10 @@
-import { ReactText } from 'react';
-import { toast } from 'react-toastify';
+import { ReactText } from "react";
+import { toast } from "react-toastify";
 
 export const ToastError = (message: string) => {
   return toast.error(message, {
     toastId: 1,
-    position: 'top-center',
+    position: "top-center",
     autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -17,7 +17,7 @@ export const ToastError = (message: string) => {
 export const ToastWarn = (message: string) => {
   return toast.warn(message, {
     toastId: 1,
-    position: 'top-center',
+    position: "top-center",
     autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -30,7 +30,7 @@ export const ToastWarn = (message: string) => {
 export const ToastSuccess = (message: string) => {
   return toast.success(message, {
     toastId: 1,
-    position: 'top-center',
+    position: "top-center",
     autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -43,7 +43,7 @@ export const ToastSuccess = (message: string) => {
 export const ToastInfo = (message: string): ReactText => {
   return toast.info(message, {
     toastId: 1,
-    position: 'top-center',
+    position: "top-center",
     autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,

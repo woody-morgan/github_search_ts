@@ -1,5 +1,5 @@
-import { throttle } from 'lodash-es';
-import { useCallback, useEffect } from 'react';
+import { throttle } from "lodash-es";
+import { useCallback, useEffect } from "react";
 
 export default function useWindowResize(callback: () => void, delay: number) {
   const handleResize = useCallback(() => {
@@ -8,8 +8,8 @@ export default function useWindowResize(callback: () => void, delay: number) {
 
   useEffect(() => {
     const throttled = throttle(handleResize, delay);
-    window.addEventListener('resize', throttled);
+    window.addEventListener("resize", throttled);
     handleResize();
-    return () => window.removeEventListener('resize', throttled);
+    return () => window.removeEventListener("resize", throttled);
   }, [handleResize, delay]);
 }

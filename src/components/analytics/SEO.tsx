@@ -1,6 +1,6 @@
-import siteMetadata from '@src/core/config/siteMetadata';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
+import siteMetadata from "@src/core/config/siteMetadata";
+import Head from "next/head";
+import { useRouter } from "next/router";
 
 interface CommonSEOProps {
   title: string;
@@ -9,7 +9,7 @@ interface CommonSEOProps {
   ogImage:
     | string
     | {
-        '@type': string;
+        "@type": string;
         url: string;
       }[];
 }

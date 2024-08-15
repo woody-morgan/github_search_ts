@@ -1,10 +1,10 @@
-import '@src/styles/globals.css';
-import 'react-toastify/dist/ReactToastify.css';
+import "@src/styles/globals.css";
+import "react-toastify/dist/ReactToastify.css";
 
-import { useEnvironment } from '@src/core/lib/relay';
-import { AppProps } from 'next/app';
-import Head from 'next/head';
-import { ReactRelayContext } from 'react-relay';
+import { useEnvironment } from "@src/core/lib/relay";
+import { AppProps } from "next/app";
+import Head from "next/head";
+import { ReactRelayContext } from "react-relay";
 
 const App = ({ Component, pageProps, router }: AppProps) => {
   const environment = useEnvironment();
