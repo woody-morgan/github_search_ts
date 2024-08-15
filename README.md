@@ -1,4 +1,4 @@
-# Greenlabs Graphql Assignment
+# Github Search with Graphql
 
 ## 실행전
 
