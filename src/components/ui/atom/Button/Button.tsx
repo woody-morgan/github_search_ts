@@ -1,6 +1,6 @@
 import { btnRounded, btnSizes, btnStyles } from '@src/utils/constants';
 import cx from 'classnames';
-import React, { forwardRef, ForwardRefRenderFunction } from 'react';
+import React, { forwardRef, ForwardRefRenderFunction, SyntheticEvent } from 'react';
 
 export type ButtonProps = {
   type?: 'button' | 'submit' | 'reset';
@@ -11,7 +11,7 @@ export type ButtonProps = {
   fullWidth?: boolean;
   className?: string;
   children?: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e?: SyntheticEvent<HTMLButtonElement>) => void;
 };
 
 const selectRounded: { [key in btnRounded]: string } = {
@@ -29,13 +29,13 @@ const selectSize: { [keys in btnSizes]: string } = {
 };
 
 const selectStyle: { [keys in btnStyles]: string } = {
-  primary: 'bg-primary-500 hover:bg-primary-700 focus:bg-primary-900',
-  secondary: 'bg-secondary-500 hover:bg-secondary-700 focus:bg-secondary-900',
-  tertiary: 'bg-slate-100 hover:bg-slate-200 focus:bg-slate-200',
-  link: 'bg-link-500 hover:bg-link-700 hover:text-link-400 focus:text-link-300',
-  danger: 'bg-red-700 text-red-100 hover:bg-red-600 focus:bg-red-600',
-  success: 'bg-green-700 text-green-100 hover:bg-green-600 focus:bg-green-600',
-  warning: 'bg-orange-700 text-orange-100 hover:bg-orange-600 focus:bg-orange-600',
+  primary: 'bg-primary-500 focus:bg-primary-900',
+  secondary: 'bg-secondary-500 focus:bg-secondary-900',
+  tertiary: 'bg-slate-100 focus:bg-slate-200',
+  link: 'bg-link-500 focus:text-link-300',
+  danger: 'bg-red-700 text-red-100 focus:bg-red-600',
+  success: 'bg-green-700 text-green-100 focus:bg-green-600',
+  warning: 'bg-orange-700 text-orange-100 focus:bg-orange-600',
   transparent: 'bg-transparent text-black',
 };
 
@@ -63,6 +63,7 @@ const Button: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
         selectStyle[styles],
         selectRounded[roundness],
         'transition-colors bg-slate focus:shadow-outline duration-150',
+        'hover:bg-opacity-90 focus:bg-opacity-90',
         disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
         fullWidth ? 'w-full' : ''
       )}

@@ -1,18 +1,31 @@
 import { RepositoryEdge } from '@src/core/queries/repositoryOwnerQuery';
+import cx from 'classnames';
 import React, { FunctionComponent } from 'react';
 
 import { Button, Icon } from '../atom';
 
-const RepositoryInfo: FunctionComponent<RepositoryEdge> = ({ node }) => {
+interface RepositoryInfoProps extends RepositoryEdge {
+  onStarClick: (id: string, isStarred: boolean) => void;
+}
+
+const RepositoryInfo: FunctionComponent<RepositoryInfoProps> = ({ node, onStarClick }) => {
+  const { id, name, description, stargazerCount, viewerHasStarred } = node;
   return (
     <div className="w-full py-2">
       <div className="space-y-2">
-        <p className="font-bold">{node.name}</p>
-        <p>{node.description ?? node.name}</p>
-        <Button className="px-2" roundness="counter" size="small">
-          <span className="flex items-center space-x-1">
+        <p className="font-bold">{name}</p>
+        <p>{description ?? name}</p>
+        <Button
+          className={cx('px-2', viewerHasStarred ? 'bg-yellow-200' : 'bg-gray-100')}
+          roundness="counter"
+          size="small"
+          onClick={() => {
+            onStarClick(id, viewerHasStarred);
+          }}
+        >
+          <span className="flex items-center space-x-1 pointer-events-none">
             <Icon className="text-yellow-400" name="star" />
-            <p>{node.stargazerCount}</p>
+            <p>{stargazerCount}</p>
           </span>
         </Button>
       </div>
