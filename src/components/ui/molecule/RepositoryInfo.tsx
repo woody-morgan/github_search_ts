@@ -16,14 +16,14 @@ const RepositoryInfo: FunctionComponent<RepositoryInfoProps> = ({ node, onStarCl
         <p className="font-bold">{name}</p>
         <p>{description ?? name}</p>
         <Button
-          className={cx('px-2', viewerHasStarred ? 'bg-yellow-200' : 'bg-gray-100')}
+          className={cx('px-4', viewerHasStarred ? 'bg-yellow-200' : 'bg-gray-100')}
           roundness="counter"
           size="small"
           onClick={() => {
             onStarClick(id, viewerHasStarred);
           }}
         >
-          <span className="flex items-center space-x-1 pointer-events-none">
+          <span className="flex items-center space-x-2 pointer-events-none">
             <Icon className="text-yellow-400" name="star" />
             <p>{stargazerCount}</p>
           </span>
