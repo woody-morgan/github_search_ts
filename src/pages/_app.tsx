@@ -5,7 +5,6 @@ import { useEnvironment } from '@src/core/lib/relay';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ReactRelayContext } from 'react-relay';
-import { ToastContainer } from 'react-toastify';
 
 const App = ({ Component, pageProps, router }: AppProps) => {
   const environment = useEnvironment();
@@ -21,7 +20,6 @@ const App = ({ Component, pageProps, router }: AppProps) => {
       </Head>
       <ReactRelayContext.Provider value={{ environment }}>
         <Component {...pageProps} key={router.route} />
-        <ToastContainer />
       </ReactRelayContext.Provider>
     </>
   );

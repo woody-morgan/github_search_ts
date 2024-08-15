@@ -30,25 +30,3 @@ export interface RepositoryOwnerQueryResponse extends OperationType {
     };
   };
 }
-
-export default graphql`
-  query repositoryOwnerQuery($login: String!, $first: Int!, $after: String) {
-    repositoryOwner(login: $login) {
-      id
-      login
-      repositories(first: $first, after: $after) {
-        edges {
-          node {
-            id
-            name
-            description
-            stargazerCount
-            viewerHasStarred
-            url
-          }
-          cursor
-        }
-      }
-    }
-  }
-`;

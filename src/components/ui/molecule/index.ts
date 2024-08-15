@@ -1,1 +1,2 @@
-export { default as RepositoryInfo } from './RepositoryInfo';
+export { default as InfiniteView } from './InfiniteView';
+export { default as RepositoryCard } from './RepositoryCard';
