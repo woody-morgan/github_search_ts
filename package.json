@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "yarn relay && next dev",
+    "dev": "concurrently \"yarn relay --watch\" \"next dev\"",
     "build": "yarn relay && next build",
     "start": "yarn relay && next start",
     "prepare": "husky install",
@@ -11,13 +11,17 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}' --fix --ext .js,.jsx,.ts,.tsx ."
   },
   "dependencies": {
+    "classnames": "^2.3.2",
     "graphql": "^16.6.0",
+    "lodash-es": "^4.17.21",
     "next": "^12.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.6.0",
     "react-relay": "^9.0.0"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.6",
     "@types/node": "18.11.3",
     "@types/react": "18.0.21",
     "@types/react-relay": "^14.1.2",
@@ -25,6 +29,7 @@
     "@typescript-eslint/eslint-plugin": "^5.40.1",
     "autoprefixer": "^10.4.12",
     "babel-plugin-relay": "^9.0.0",
+    "concurrently": "^7.5.0",
     "eslint": "^8.25.0",
     "eslint-config-next": "^12.3.1",
     "eslint-config-prettier": "^8.5.0",
