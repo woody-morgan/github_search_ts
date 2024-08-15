@@ -6,11 +6,8 @@ import { initEnvironment } from '@src/core/lib/relay';
 import repositoryOwnerQuery, {
   RepositoryOwnerQueryResponse,
 } from '@src/core/queries/repositoryOwnerQuery';
+import { defaultLogin, pagination } from '@src/utils/constants';
 import { fetchQuery } from 'react-relay';
-
-// defaults
-const pagination = 5;
-const defaultLogin = 'green-labs';
 
 export async function getServerSideProps() {
   const environment = initEnvironment();
