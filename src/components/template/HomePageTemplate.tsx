@@ -70,12 +70,6 @@ const MainPageTemplate: FunctionComponent<HomePageTemplateProps> = ({
         }
         return;
       }
-      // Found but no data
-      if (_newRepo.repositoryOwner.repositories.edges.length === 0) {
-        lastCursor.current = null;
-        setRepoInfo(_newRepo.repositoryOwner);
-        return;
-      }
       // set cursor
       lastCursor.current =
         _newRepo.repositoryOwner.repositories.edges[

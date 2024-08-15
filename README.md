@@ -25,10 +25,11 @@
 
 1. useWindowReSize hook을 useCallback을 통해 memoization 했습니다.(src/hooks/useWindowReSize.ts)
 2. Immutable.js와 immer.js의 차이점은 다음과 같습니다
-* Immutable.js의 경우, JS 기본 객체를 사용하지 않고 자체적으로 만든 List 객체를 사용합니다.(자료구조는 Trie로 되어있으며 이는 O(log(branching_factor)n)의 시간복잡도를 가집니다.)
-* Immer의 경우 JS 기본 객체를 사용합니다. Immer의 경우 Proxy를 사용하여 객체를 감싸고, 이를 통해 객체의 변경을 감지합니다. 이는 O(n)의 시간복잡도를 가집니다.
-* 하지만 실제 사용시에는 Immutable.js의 경우, Plain Object로 만드는 과정이 필요하기 때문에 실제 사용시 Immer.js의 경우보다 느린 경우가 많습니다.
-* [관련자료](https://immerjs.github.io/immer/performance/)
+
+- Immutable.js의 경우, JS 기본 객체를 사용하지 않고 자체적으로 만든 List 객체를 사용합니다.(자료구조는 Trie로 되어있으며 이는 O(log(branching_factor)n)의 시간복잡도를 가집니다.)
+- Immer의 경우 JS 기본 객체를 사용합니다. Immer의 경우 Proxy를 사용하여 객체를 감싸고, 이를 통해 객체의 변경을 감지합니다. 이는 O(n)의 시간복잡도를 가집니다.
+- 하지만 실제 사용시에는 Immutable.js의 경우, Plain Object로 만드는 과정이 필요하기 때문에 실제 사용시 Immer.js의 경우보다 느린 경우가 많습니다.
+- [관련자료](https://immerjs.github.io/immer/performance/)
 
 ## 퍼포먼스 체크
 
