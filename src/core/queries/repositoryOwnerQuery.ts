@@ -7,6 +7,7 @@ export interface RepositoryEdge {
     description: string;
     stargazerCount: number;
     viewerHasStarred: boolean;
+    url: string;
   };
   cursor: string;
 }
@@ -43,6 +44,7 @@ export default graphql`
             description
             stargazerCount
             viewerHasStarred
+            url
           }
           cursor
         }
