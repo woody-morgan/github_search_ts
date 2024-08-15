@@ -1,6 +1,8 @@
+import { PageSEO } from '@src/components/analytics/SEO';
 import { PageLayout } from '@src/components/layout';
 import { Button } from '@src/components/ui/atom';
 import { RepositoryInfo } from '@src/components/ui/molecule';
+import siteMetadata from '@src/core/config/siteMetadata';
 import { initEnvironment } from '@src/core/lib/relay';
 import repositoryOwner, { RepositoryOwnerQueryResponse } from '@src/core/queries/repositoryOwner';
 import { useState } from 'react';
@@ -42,6 +44,7 @@ function HomePage({ repositoryOwner }: HomePageProps) {
 
   return (
     <PageLayout>
+      <PageSEO title={siteMetadata.title} description={'Search Github Repositories'} />
       <div className="w-full space-y-4 divide-y-2">
         {edges.length > 0 ? (
           edges.map((edge) => <RepositoryInfo key={edge.cursor} {...edge} />)
