@@ -1,9 +1,13 @@
 import '@src/styles/globals.css';
 
+import { useEnvironment } from '@src/core/lib/relay';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { ReactRelayContext } from 'react-relay';
 
 const App = ({ Component, pageProps, router }: AppProps) => {
+  const environment = useEnvironment();
+
   return (
     <>
       <Head>
@@ -13,7 +17,9 @@ const App = ({ Component, pageProps, router }: AppProps) => {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
       </Head>
-      <Component {...pageProps} key={router.route} />
+      <ReactRelayContext.Provider value={{ environment }}>
+        <Component {...pageProps} key={router.route} />
+      </ReactRelayContext.Provider>
     </>
   );
 };
