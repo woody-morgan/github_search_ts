@@ -1,5 +1,4 @@
-import { graphql } from 'react-relay';
-import { OperationType } from 'relay-runtime';
+import { graphql, OperationType } from 'relay-runtime';
 
 export interface RepositoryEdge {
   node: {
@@ -19,6 +18,7 @@ export interface RepositoryOwnerQueryResponse extends OperationType {
   variables: {
     login: string;
     first: number;
+    after?: string;
   };
   response: {
     repositoryOwner: {

@@ -4,18 +4,25 @@ import { Button } from '@src/components/ui/atom';
 import { RepositoryInfo } from '@src/components/ui/molecule';
 import siteMetadata from '@src/core/config/siteMetadata';
 import { initEnvironment } from '@src/core/lib/relay';
-import repositoryOwner, { RepositoryOwnerQueryResponse } from '@src/core/queries/repositoryOwner';
-import { useState } from 'react';
+import repositoryOwnerQuery, {
+  RepositoryOwnerQueryResponse,
+} from '@src/core/queries/repositoryOwnerQuery';
+import { produce } from 'immer';
+import { useRef, useState } from 'react';
 import { fetchQuery } from 'react-relay';
 
 const pagination = 5;
 
 export async function getStaticProps() {
   const environment = initEnvironment();
-  const queryProps = await fetchQuery<RepositoryOwnerQueryResponse>(environment, repositoryOwner, {
-    login: 'green-labs',
-    first: pagination,
-  });
+  const queryProps = await fetchQuery<RepositoryOwnerQueryResponse>(
+    environment,
+    repositoryOwnerQuery,
+    {
+      login: 'green-labs',
+      first: pagination,
+    }
+  );
   const initialRecords = environment.getStore().getSource().toJSON();
 
   return {
@@ -31,15 +38,41 @@ interface HomePageProps {
 }
 
 function HomePage({ repositoryOwner }: HomePageProps) {
-  const [repositories, setRepositories] =
+  const [repositoryInfo, setRepositoryInfo] =
     useState<RepositoryOwnerQueryResponse['response']['repositoryOwner']>(repositoryOwner);
 
-  const { edges } = repositories.repositories;
-  const lastCursor = edges[edges.length - 1].cursor;
+  const { edges } = repositoryInfo.repositories;
+  const lastCursor = useRef<string>(edges[edges.length - 1].cursor);
 
   const handleLoadMore = async () => {
-    // Todo: load more
-    console.log('load more');
+    const environment = initEnvironment();
+    const queryProps = await fetchQuery<RepositoryOwnerQueryResponse>(
+      environment,
+      repositoryOwnerQuery,
+      {
+        login: 'green-labs',
+        first: pagination,
+        after: lastCursor.current ?? null,
+      }
+    );
+    const _newRepositoryInfo = { ...queryProps } as RepositoryOwnerQueryResponse['response'];
+
+    // exception
+    if (_newRepositoryInfo.repositoryOwner.repositories.edges.length === 0) return;
+
+    lastCursor.current =
+      _newRepositoryInfo.repositoryOwner.repositories.edges[
+        _newRepositoryInfo.repositoryOwner.repositories.edges.length - 1
+      ].cursor;
+
+    setRepositoryInfo((prev) => ({
+      ...prev,
+      repositories: {
+        ...produce(prev.repositories, (draft) => {
+          draft.edges.push(..._newRepositoryInfo.repositoryOwner.repositories.edges);
+        }),
+      },
+    }));
   };
 
   return (
